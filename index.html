@@ -354,6 +354,60 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
   .btn-primary:hover,.btn-ghost:hover{transform:none;}
   .social-btn:hover{transform:none;}
 }
+/* ═══════════════ GLOBE SECTION ═══════════════ */
+.globe-hint{font-family:var(--mono);font-size:12px;color:var(--sub);margin-bottom:28px;letter-spacing:.05em;}
+.globe-layout{display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:center;}
+.globe-wrap{
+  position:relative;
+  width:100%;aspect-ratio:1;
+  max-height:500px;
+  border-radius:20px;
+  background:radial-gradient(ellipse at 40% 40%, rgba(0,212,255,.07) 0%, rgba(0,0,0,0) 70%);
+  border:1px solid var(--border);
+  overflow:hidden;
+  cursor:grab;
+}
+.globe-wrap:active{cursor:grabbing;}
+#skillGlobe{display:block;width:100%!important;height:100%!important;}
+.globe-overlay-text{
+  position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:10px;color:var(--sub);
+  background:var(--glass);border:1px solid var(--border);
+  padding:4px 14px;border-radius:20px;
+  backdrop-filter:blur(8px);
+  opacity:1;transition:opacity .5s;
+  pointer-events:none;white-space:nowrap;
+}
+.globe-wrap.dragged .globe-overlay-text{opacity:0;}
+
+.globe-legend{display:flex;flex-direction:column;gap:20px;}
+.legend-group{}
+.legend-title{
+  display:flex;align-items:center;gap:8px;
+  font-weight:600;font-size:13px;margin-bottom:10px;
+}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;box-shadow:0 0 6px currentColor;}
+.legend-tags{display:flex;flex-wrap:wrap;gap:7px;}
+.l-tag{
+  font-family:var(--mono);font-size:11px;
+  padding:4px 11px;border-radius:20px;
+  background:rgba(0,212,255,.06);
+  border:1px solid rgba(0,212,255,.2);
+  color:var(--cyan);
+  transition:all .2s;cursor:default;
+}
+.l-tag:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,212,255,.2);}
+
+/* Responsive globe */
+@media(max-width:900px){
+  .globe-layout{grid-template-columns:1fr;gap:28px;}
+  .globe-wrap{max-height:380px;}
+  .globe-legend{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+}
+@media(max-width:520px){
+  .globe-wrap{max-height:300px;}
+  .globe-legend{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
@@ -392,7 +446,7 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
   <div class="mob-drawer-bottom">
     <div class="mob-status"><div class="status-dot"></div>Available for hire</div>
     <div class="mob-social">
-      <a class="social-btn" href="mailto:kerkarprathmesh8@gmail.com" title="Email">✉</a>
+      <a class="social-btn" href="/cdn-cgi/l/email-protection#8ae1eff8e1ebf8faf8ebfee2e7eff9e2b2caede7ebe3e6a4e9e5e7" title="Email">✉</a>
       <a class="social-btn" href="https://linkedin.com/in/prathmesh-kerkar" target="_blank" title="LinkedIn">in</a>
       <a class="social-btn" href="tel:+917506148946" title="Phone">☎</a>
     </div>
@@ -420,7 +474,7 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
     <div class="nav-item" data-target="contact"><span class="nav-icon">◉</span>Contact</div>
   </nav>
   <div class="social-links">
-    <a class="social-btn" href="mailto:kerkarprathmesh8@gmail.com" title="Email">✉</a>
+    <a class="social-btn" href="/cdn-cgi/l/email-protection#452e20372e2437353724312d2820362d7d052228242c296b262a28" title="Email">✉</a>
     <a class="social-btn" href="https://linkedin.com/in/prathmesh-kerkar" target="_blank" title="LinkedIn">in</a>
     <a class="social-btn" href="tel:+917506148946" title="Phone">☎</a>
   </div>
@@ -532,31 +586,40 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
   <section id="tech">
     <div class="sec-tag">03 — Technical Stack</div>
     <h2 class="sec-title">Skills &amp; <span>Technologies</span></h2>
-    <div class="cat-title">Languages</div>
-    <div class="tech-grid">
-      <div class="tech-chip"><div class="tech-icon">🔷</div>C#<div class="tech-label">Primary</div></div>
-      <div class="tech-chip"><div class="tech-icon">🟨</div>JavaScript<div class="tech-label">ES6+</div></div>
-      <div class="tech-chip"><div class="tech-icon">🔵</div>TypeScript<div class="tech-label">Typed JS</div></div>
-      <div class="tech-chip"><div class="tech-icon">🐍</div>Python<div class="tech-label">Scripting</div></div>
-      <div class="tech-chip"><div class="tech-icon">🗄️</div>SQL<div class="tech-label">T-SQL</div></div>
-      <div class="tech-chip"><div class="tech-icon">🌐</div>HTML5/CSS3<div class="tech-label">Markup</div></div>
-    </div>
-    <div class="cat-title">Frameworks</div>
-    <div class="tech-grid">
-      <div class="tech-chip"><div class="tech-icon">⚡</div>.NET Core<div class="tech-label">6/7</div></div>
-      <div class="tech-chip"><div class="tech-icon">🅰️</div>Angular<div class="tech-label">14+</div></div>
-      <div class="tech-chip"><div class="tech-icon">🏛️</div>ASP.NET MVC<div class="tech-label">Framework</div></div>
-      <div class="tech-chip"><div class="tech-icon">🔗</div>Entity Framework<div class="tech-label">ORM</div></div>
-      <div class="tech-chip"><div class="tech-icon">🎨</div>Bootstrap<div class="tech-label">CSS</div></div>
-    </div>
-    <div class="cat-title">Cloud, DevOps &amp; Tools</div>
-    <div class="tech-grid">
-      <div class="tech-chip"><div class="tech-icon">☁️</div>Azure<div class="tech-label">App Service</div></div>
-      <div class="tech-chip"><div class="tech-icon">🔄</div>Azure DevOps<div class="tech-label">CI/CD</div></div>
-      <div class="tech-chip"><div class="tech-icon">📦</div>Git/GitHub<div class="tech-label">VCS</div></div>
-      <div class="tech-chip"><div class="tech-icon">🗃️</div>SQL Server<div class="tech-label">SSMS</div></div>
-      <div class="tech-chip"><div class="tech-icon">🤖</div>UiPath<div class="tech-label">RPA</div></div>
-      <div class="tech-chip"><div class="tech-icon">🧪</div>Postman<div class="tech-label">API Testing</div></div>
+    <p class="globe-hint reveal">Drag to explore the skills universe</p>
+
+    <!-- GLOBE WRAPPER -->
+    <div class="globe-layout reveal">
+      <div class="globe-wrap" id="globeWrap">
+        <canvas id="skillGlobe"></canvas>
+        <div class="globe-overlay-text">Drag to rotate</div>
+      </div>
+      <div class="globe-legend">
+        <div class="legend-group">
+          <div class="legend-title"><span class="legend-dot" style="background:#00d4ff"></span>Languages</div>
+          <div class="legend-tags">
+            <span class="l-tag">C#</span><span class="l-tag">JavaScript</span><span class="l-tag">TypeScript</span><span class="l-tag">Python</span><span class="l-tag">SQL</span><span class="l-tag">HTML5/CSS3</span>
+          </div>
+        </div>
+        <div class="legend-group">
+          <div class="legend-title"><span class="legend-dot" style="background:#39ff8f"></span>Frameworks</div>
+          <div class="legend-tags">
+            <span class="l-tag" style="border-color:rgba(57,255,143,.3);color:#39ff8f">.NET Core</span><span class="l-tag" style="border-color:rgba(57,255,143,.3);color:#39ff8f">Angular</span><span class="l-tag" style="border-color:rgba(57,255,143,.3);color:#39ff8f">ASP.NET MVC</span><span class="l-tag" style="border-color:rgba(57,255,143,.3);color:#39ff8f">Entity Framework</span><span class="l-tag" style="border-color:rgba(57,255,143,.3);color:#39ff8f">Bootstrap</span>
+          </div>
+        </div>
+        <div class="legend-group">
+          <div class="legend-title"><span class="legend-dot" style="background:#ff7043"></span>Cloud &amp; Tools</div>
+          <div class="legend-tags">
+            <span class="l-tag" style="border-color:rgba(255,112,67,.3);color:#ff7043">Azure</span><span class="l-tag" style="border-color:rgba(255,112,67,.3);color:#ff7043">Azure DevOps</span><span class="l-tag" style="border-color:rgba(255,112,67,.3);color:#ff7043">Git/GitHub</span><span class="l-tag" style="border-color:rgba(255,112,67,.3);color:#ff7043">SQL Server</span><span class="l-tag" style="border-color:rgba(255,112,67,.3);color:#ff7043">UiPath</span><span class="l-tag" style="border-color:rgba(255,112,67,.3);color:#ff7043">Postman</span>
+          </div>
+        </div>
+        <div class="legend-group">
+          <div class="legend-title"><span class="legend-dot" style="background:#c084fc"></span>Architecture</div>
+          <div class="legend-tags">
+            <span class="l-tag" style="border-color:rgba(192,132,252,.3);color:#c084fc">REST APIs</span><span class="l-tag" style="border-color:rgba(192,132,252,.3);color:#c084fc">Microservices</span><span class="l-tag" style="border-color:rgba(192,132,252,.3);color:#c084fc">SOLID</span><span class="l-tag" style="border-color:rgba(192,132,252,.3);color:#c084fc">JWT/RBAC</span><span class="l-tag" style="border-color:rgba(192,132,252,.3);color:#c084fc">CI/CD</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -587,7 +650,7 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
     <h2 class="sec-title">Get In <span>Touch</span></h2>
     <p class="contact-sub">Open to full-stack engineering roles, enterprise projects, and high-impact product teams. Let's build something great together.</p>
     <div class="contact-cards">
-      <a class="c-card" href="mailto:kerkarprathmesh8@gmail.com"><div class="c-icon">✉️</div><div class="c-label">Email</div><div class="c-val">kerkarprathmesh8@gmail.com</div></a>
+      <a class="c-card" href="/cdn-cgi/l/email-protection#660d03140d0714161407120e0b03150e5e26010b070f0a4805090b"><div class="c-icon">✉️</div><div class="c-label">Email</div><div class="c-val"><span class="__cf_email__" data-cfemail="771c12051c1605070516031f1a12041f4f37101a161e1b5914181a">[email&#160;protected]</span></div></a>
       <a class="c-card" href="tel:+917506148946"><div class="c-icon">📱</div><div class="c-label">Phone</div><div class="c-val">+91 75061 48946</div></a>
       <a class="c-card" href="https://linkedin.com/in/prathmesh-kerkar" target="_blank"><div class="c-icon">💼</div><div class="c-label">LinkedIn</div><div class="c-val">prathmesh-kerkar</div></a>
       <a class="c-card"><div class="c-icon">📍</div><div class="c-label">Location</div><div class="c-val">Mumbai, India 400056</div></a>
@@ -613,7 +676,7 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
   <span>Built with precision · Mumbai, India</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* PARTICLE MESH */
 (function(){
   const c=document.getElementById('bg-canvas'),ctx=c.getContext('2d');
@@ -647,6 +710,7 @@ function applyTheme(light){
   document.getElementById('tTrack')?.classList.toggle('on',light);
   const lbl=document.getElementById('themeLabel');if(lbl)lbl.textContent=light?'Dark mode':'Light mode';
   document.getElementById('mobThemeBtn').textContent=light?'☀️':'🌙';
+  window.dispatchEvent(new Event('themechange'));
 }
 document.getElementById('themeBtn')?.addEventListener('click',()=>applyTheme(!isLight));
 document.getElementById('mobThemeBtn')?.addEventListener('click',()=>applyTheme(!isLight));
@@ -726,6 +790,248 @@ document.querySelectorAll('.sec-tag,.sec-title,.reveal,.tl-item,.tech-chip,.proj
   io.observe(el);
 });
 io.observe(document.getElementById('skillBars'));
+</script>
+
+<!-- THREE.JS SKILL GLOBE -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+
+/* ── Inline SVG data URIs — zero network, zero CORS ── */
+const SVG = {
+  csharp:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#9B4F96" d="M115.4 30.7L67.1 2.9c-.8-.5-1.9-.7-3.1-.7-1.2 0-2.3.3-3.1.7l-48 27.9c-1.7 1-2.9 3.5-2.9 5.4v55.7c0 1.1.2 2.4 1 3.5l106.8-62c-.6-1.2-1.5-2.1-2.4-2.7z"/><path fill="#68217A" d="M10.7 95.3c.5.8 1.2 1.5 1.9 1.9l48.2 27.9c.8.5 1.9.7 3.1.7 1.2 0 2.3-.3 3.1-.7l48-27.9c1.7-1 2.9-3.5 2.9-5.4V36.1c0-.9-.1-1.9-.6-2.8l-106.6 62z"/><path fill="#fff" d="M85.3 76.1C81.1 83.5 73.1 88.5 64 88.5c-13.5 0-24.5-11-24.5-24.5s11-24.5 24.5-24.5c9.1 0 17.1 5 21.3 12.5l13-7.5c-6.8-11.9-19.6-20-34.3-20-21.8 0-39.5 17.7-39.5 39.5s17.7 39.5 39.5 39.5c14.6 0 27.4-8 34.2-19.8l-12.9-7.6zM97 66.2l.9-4.3h-4.2v-4.7h5.1L100 51h4.9l-1.2 6.1h3.8l1.2-6.1h4.8l-1.2 6.1h2.4v4.7h-3.3l-.9 4.3h4.2v4.7h-5.1l-1.2 6h-4.9l1.2-6h-3.8l-1.2 6h-4.8l1.2-6h-2.4v-4.7H97zm4.8 0h3.8l.9-4.3h-3.8l-.9 4.3z"/></svg>`,
+  js:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z"/><path fill="#323330" d="M116.347 96.736c-.917-5.711-4.641-10.508-15.672-14.981-3.832-1.761-8.104-3.022-9.377-5.926-.452-1.69-.512-2.642-.226-3.665.821-3.32 4.784-4.355 7.925-3.403 2.023.678 3.938 2.237 5.093 4.724 5.402-3.498 5.391-3.475 9.163-5.879-1.381-2.141-2.118-3.129-3.022-4.045-3.249-3.629-7.676-5.498-14.756-5.355l-3.688.477c-3.534.893-6.902 2.748-8.877 5.235-5.926 6.724-4.236 18.492 2.975 23.335 7.104 5.332 17.54 6.545 18.873 11.531 1.297 6.104-4.486 8.08-10.234 7.378-4.236-.881-6.592-3.034-9.139-6.949-4.688 2.713-4.688 2.713-9.508 5.485 1.143 2.499 2.344 3.63 4.26 5.795 9.068 9.198 31.76 8.746 35.83-5.176.165-.478 1.261-3.666.38-8.581zM69.462 58.943H57.753l-.048 30.272c0 6.438.333 12.34-.714 14.149-1.713 3.558-6.152 3.117-8.175 2.427-2.059-1.012-3.106-2.451-4.319-4.485-.333-.584-.583-1.036-.667-1.071l-9.52 5.83c1.583 3.249 3.915 6.069 6.902 7.901 4.462 2.678 10.459 3.499 16.731 2.059 4.082-1.189 7.604-3.652 9.448-7.401 2.666-4.915 2.094-10.864 2.07-17.444.06-10.735.001-21.468.001-32.237z"/></svg>`,
+  ts:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#fff" d="M22.67 47h99.67v73.67H22.67z"/><path fill="#007ACC" d="M1.5 63.91v62.5h125v-125H1.5zm100.73-5a15.56 15.56 0 017.82 4.5 20.58 20.58 0 013 4c0 .16-5.4 3.81-8.69 5.85-.12.08-.6-.44-1.13-1.23a7.09 7.09 0 00-5.87-3.53c-3.79-.26-6.23 1.73-6.21 5a4.58 4.58 0 00.54 2.34c.83 1.73 2.38 2.76 7.24 4.86 8.95 3.85 12.78 6.39 15.16 10 2.66 4 3.25 10.46 1.45 15.24-2 5.2-6.9 8.73-13.83 9.9a38.32 38.32 0 01-9.52-.1 23 23 0 01-12.72-6.63c-1.15-1.27-3.39-4.58-3.25-4.82a9.34 9.34 0 011.15-.73L82 101l3.59-2.08.75 1.11a16.78 16.78 0 004.74 4.54c4 2.1 9.46 1.81 12.16-.62a5.43 5.43 0 00.69-6.92c-1-1.39-3-2.56-8.59-5-6.45-2.78-9.23-4.5-11.77-7.24a16.48 16.48 0 01-3.43-6.25 25 25 0 01-.22-8c1.33-6.23 6-10.58 12.82-11.87a31.66 31.66 0 019.49.26zm-29.34 5.24v5.12H56.66v46.23H45.15V69.26H28.88v-5a49.19 49.19 0 01.12-5.17C29.08 59 39 59 51 59h21.83z"/></svg>`,
+  python:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><linearGradient id="py1" x1="70.252" y1="1237.476" x2="170.659" y2="1151.089" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5A9FD4"/><stop offset="1" stop-color="#306998"/></linearGradient><linearGradient id="py2" x1="209.474" y1="1098.811" x2="173.62" y2="1149.537" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FFD43B"/><stop offset="1" stop-color="#FFE873"/></linearGradient><path fill="url(#py1)" d="M63.391 1.988c-4.222.02-8.252.379-11.8 1.007-10.45 1.846-12.346 5.71-12.346 12.837v9.411h24.693v3.137H29.977c-7.176 0-13.46 4.313-15.426 12.521-2.268 9.405-2.368 15.275 0 25.096 1.755 7.311 5.947 12.519 13.124 12.519h8.491V67.234c0-8.151 7.051-15.34 15.426-15.34h24.665c6.866 0 12.346-5.654 12.346-12.548V15.833c0-6.693-5.646-11.72-12.346-12.837-4.244-.706-8.645-1.027-12.866-1.008zM50.037 9.557c2.55 0 4.634 2.117 4.634 4.721 0 2.593-2.083 4.69-4.634 4.69-2.56 0-4.633-2.097-4.633-4.69-.001-2.604 2.073-4.721 4.633-4.721z"/><path fill="url(#py2)" d="M91.682 28.38v10.966c0 8.5-7.208 15.655-15.426 15.655H51.591c-6.756 0-12.346 5.783-12.346 12.549v23.515c0 6.691 5.818 10.628 12.346 12.547 7.816 2.297 15.312 2.713 24.665 0 6.216-1.801 12.346-5.423 12.346-12.547v-9.412H63.938v-3.138h37.012c7.176 0 9.852-5.005 12.348-12.519 2.578-7.735 2.467-15.174 0-25.096-1.774-7.145-5.161-12.521-12.348-12.521h-9.268zM77.809 87.927c2.561 0 4.634 2.097 4.634 4.692 0 2.602-2.074 4.719-4.634 4.719-2.55 0-4.633-2.117-4.633-4.719 0-2.595 2.083-4.692 4.633-4.692z"/></svg>`,
+  html5:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#E44D26" d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z"/><path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z"/><path fill="#EBEBEB" d="M64 52.455H45.788L44.53 38.361H64V24.599H29.489l.33 3.692 3.382 37.927H64zm0 35.743l-.061.017-15.327-4.14-.979-10.975H33.816l1.928 21.609 28.193 7.826.063-.017z"/><path fill="#fff" d="M63.952 52.455v13.763h16.947l-1.597 17.849-15.35 4.143v14.319l28.215-7.82.207-2.334 3.234-36.233.335-3.687zm0-27.856v13.762h33.244l.276-3.092.628-6.978.329-3.692z"/></svg>`,
+  css3:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#1572B6" d="M18.814 114.123L8.76 1.352h110.48l-10.064 112.754-45.243 12.543-45.119-12.526z"/><path fill="#33A9DC" d="M64.001 117.062l36.559-10.136 8.601-96.354H64.001v106.49z"/><path fill="#fff" d="M64.001 51.429h18.302l1.264-14.163H64.001V23.435h34.682l-.332 3.711-3.4 38.114h-30.95V51.429z"/><path fill="#EBEBEB" d="M64.083 87.349l-.061.018-15.403-4.159-.985-11.031H33.752l1.937 21.717 28.331 7.863.063-.018v-14.39z"/><path fill="#fff" d="M81.127 64.675l-1.666 18.522-15.426 4.164v14.39l28.354-7.858.208-2.337 2.406-26.881H81.127z"/><path fill="#EBEBEB" d="M64.048 23.435v13.831H30.64l-.277-3.108-.63-7.012-.331-3.711h34.646zm-.047 27.994v13.831H48.792l-.277-3.108-.631-7.012-.33-3.711h16.447z"/></svg>`,
+  sql:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><ellipse fill="#00758F" cx="64" cy="30" rx="56" ry="22"/><path fill="#00758F" d="M8 30v68c0 12.2 25.1 22 56 22s56-9.8 56-22V30c0 12.2-25.1 22-56 22S8 42.2 8 30z"/><ellipse fill="#F29111" cx="64" cy="30" rx="56" ry="22"/><path fill="#007A91" d="M8 64v34c0 12.2 25.1 22 56 22s56-9.8 56-22V64c0 12.2-25.1 12-56 12S8 76.2 8 64z" opacity=".4"/></svg>`,
+  dotnet:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#512BD4" d="M0 0h128v128H0z"/><path fill="#fff" d="M26 43h76v8H26zM26 77h76v8H26zm0-17h76v8H26z"/><circle fill="#fff" cx="20" cy="80" r="7"/></svg>`,
+  angular:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#DD0031" d="M63.81 1.87l-2.63 1.24L1.16 27.7.03 30.49l15.2 52.06 2.85 1.64L64 110.6l45.92-26.41 2.85-1.64 15.2-52.06-1.13-2.79-60.02-24.59-2.61-1.24z"/><path fill="#C3002F" d="M63.81 1.87l.19.06V110.6l45.92-26.41 2.85-1.64 15.2-52.06-1.13-2.79-60.02-24.59-2.61-1.24-.4-.2z"/><path fill="#fff" d="M63.81 17.88L26.45 83.16h13.68l7.3-18.21h32.64l7.3 18.21h13.68L63.81 17.88zm0 19.9l11.53 28.75H52.28l11.53-28.75z"/></svg>`,
+  aspnet:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#512BD4" d="M0 0h128v128H0z"/><path fill="#fff" d="M20 44h88v8H20zm0 16h88v8H20zm0 16h88v8H20z"/></svg>`,
+  efcore:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#512BD4" d="M0 0h128v128H0z"/><ellipse fill="none" stroke="#fff" stroke-width="7" cx="64" cy="44" rx="46" ry="16"/><path fill="none" stroke="#fff" stroke-width="7" d="M18 44v40c0 8.8 20.6 16 46 16s46-7.2 46-16V44"/><path fill="none" stroke="#fff" stroke-width="7" d="M18 64c0 8.8 20.6 16 46 16s46-7.2 46-16"/></svg>`,
+  bootstrap:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#7B12F5" d="M0 14.1C0 6.3 6.3 0 14.1 0h99.8C121.7 0 128 6.3 128 14.1v99.8c0 7.8-6.3 14.1-14.1 14.1H14.1C6.3 128 0 121.7 0 113.9V14.1z"/><path fill="#fff" d="M40.8 32h33.6c7.3 0 13 1.8 16.9 5.4 3.9 3.6 5.8 8.5 5.8 14.7 0 4.5-1.1 8.2-3.4 11.2-1.5 2-3.6 3.6-6.2 4.8 3.8 1.1 6.7 3.1 8.7 5.9 2 2.8 3 6.4 3 10.6 0 6.6-2.1 11.8-6.4 15.5-4.2 3.7-10.2 5.6-17.9 5.8H40.8V32zm14.4 31.4h16.2c4 0 7-.8 9-2.5 2-1.7 3-4.2 3-7.5 0-3.1-1-5.5-3-7.2-2-1.7-5-2.5-9-2.5H55.2v19.7zm0 30.9h17.8c4.3 0 7.6-.9 9.7-2.8 2.1-1.9 3.2-4.5 3.2-7.9 0-3.3-1.1-5.8-3.3-7.7-2.2-1.8-5.4-2.7-9.6-2.7H55.2v21.1z"/></svg>`,
+  azure:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#0072C6" d="M57.8 10.8L22 82l15.5 27.3H98L57.8 10.8z"/><path fill="#0072C6" d="M73.7 18.5L46.6 94.1l12 21.3 51.6-9.1L73.7 18.5z" opacity=".7"/><path fill="#fff" d="M22 82l36.3 15.4-14 11.9z"/></svg>`,
+  azuredevops:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#0078D7" d="M0 44.8L16 24l60-22.6V17L30 41.6 16 36.8zm128 0V61L87.5 128 62 113V98l45.5 19.2zm-128 0v33.6L16 113l30-15.4V84L30 98 16 78.4zM87.5 0L62 16.6V33l34-11 16 28L128 44.8z"/></svg>`,
+  git:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#F34F29" d="M124.737 58.378L69.621 3.264c-3.172-3.174-8.32-3.174-11.497 0L46.68 14.71l14.518 14.518c3.375-1.139 7.243-.375 9.932 2.314 2.703 2.706 3.461 6.607 2.294 9.993l13.992 13.993c3.385-1.167 7.292-.413 9.994 2.295 3.78 3.777 3.78 9.9 0 13.679a9.673 9.673 0 01-13.683 0 9.677 9.677 0 01-2.105-10.521L68.574 47.933l-.002 34.341a9.708 9.708 0 012.559 1.828c3.778 3.777 3.778 9.898 0 13.683-3.779 3.777-9.904 3.777-13.679 0-3.778-3.784-3.778-9.905 0-13.683a9.65 9.65 0 013.167-2.11V47.333a9.581 9.581 0 01-3.167-2.111c-2.862-2.86-3.551-7.06-2.083-10.576L41.056 20.128 3.264 57.921c-3.174 3.174-3.174 8.32 0 11.497l55.115 55.118c3.174 3.174 8.32 3.174 11.497 0l54.861-54.861c3.174-3.176 3.174-8.322 0-11.297"/></svg>`,
+  github:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#fff" fill-rule="evenodd" clip-rule="evenodd" d="M64 5.103c-33.347 0-60.388 27.035-60.388 60.388 0 26.682 17.303 49.317 41.297 57.303 3.017.56 4.125-1.31 4.125-2.905 0-1.44-.056-6.197-.082-11.243-16.8 3.653-20.345-7.125-20.345-7.125-2.747-6.98-6.705-8.836-6.705-8.836-5.48-3.748.413-3.67.413-3.67 6.063.425 9.257 6.223 9.257 6.223 5.386 9.23 14.127 6.562 17.573 5.02.542-3.903 2.107-6.568 3.834-8.076-13.413-1.525-27.514-6.709-27.514-29.843 0-6.593 2.36-11.98 6.223-16.21-.628-1.52-2.695-7.662.584-15.98 0 0 5.07-1.623 16.61 6.19C53.7 35 58.867 34.327 64 34.304c5.13.023 10.3.694 15.127 2.033 11.526-7.813 16.59-6.19 16.59-6.19 3.287 8.317 1.22 14.46.593 15.98 3.872 4.23 6.215 9.617 6.215 16.21 0 23.194-14.127 28.3-27.574 29.796 2.167 1.874 4.097 5.55 4.097 11.183 0 8.08-.07 14.583-.07 16.572 0 1.607 1.088 3.49 4.148 2.897 23.98-7.994 41.263-30.622 41.263-57.294C124.388 32.14 97.35 5.103 64 5.103z"/></svg>`,
+  sqlserver:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><ellipse fill="#CC2927" cx="64" cy="30" rx="56" ry="22"/><path fill="#CC2927" d="M8 30v68c0 12.2 25.1 22 56 22s56-9.8 56-22V30c0 12.2-25.1 22-56 22S8 42.2 8 30z"/><ellipse fill="#FF6160" cx="64" cy="30" rx="56" ry="22"/><path fill="#BE1E1E" d="M8 64v34c0 12.2 25.1 22 56 22s56-9.8 56-22V64c0 12.2-25.1 12-56 12S8 76.2 8 64z"/></svg>`,
+  postman:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle fill="#FF6C37" cx="64" cy="64" r="64"/><path fill="#fff" d="M93.3 47.5c-8.6-8.6-22.6-8.6-31.2 0L46.8 62.8l4.2 4.2 15.3-15.3c6.2-6.2 16.3-6.2 22.5 0s6.2 16.3 0 22.5L73.5 89.5l4.2 4.2 15.3-15.3c8.9-8.6 8.9-22.3.3-30.9z"/><path fill="#fff" d="M54.5 78.3L39.2 93.6l-4.2-4.2 15.3-15.3c6.2-6.2 6.2-16.3 0-22.5l4.2-4.2c8.6 8.6 8.6 22.6 0 31.2l.0-.5z"/><circle fill="#FF6C37" cx="47" cy="74" r="5"/></svg>`,
+  vscode:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#0065A9" d="M90.767 11.33L51.2 47.383 24.017 28.6 8.683 36.117V91.95l15.334 7.516L51.2 80.683l39.567 36.052L119.35 104.5V23.567zm3.65 78.6L64 64l30.417-25.93z"/><path fill="#007ACC" d="M8.683 91.95l15.334 7.516V36.117L8.683 43.633z"/><path fill="#1F9CF0" d="M94.417 64L51.2 80.683l13.75 9.267 29.467-16z"/></svg>`,
+  docker:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#2496ED" d="M124.8 52.1c-2-1.4-6.6-2-10.3-1.3-.5-3.5-2.5-6.5-6.1-9.3l-2.1-1.4-1.4 2.1c-2.7 4.1-3.4 10.8-1.1 15.2-1.6.9-4.7 2.1-8.8 2H2.7c-.9 5.5.5 12.6 4.4 17.5 3.8 4.8 9.5 7.2 17.2 7.2 16.4 0 28.5-7.5 34.2-21.2 2.2.1 7 .1 9.5-4.6.1-.2 1.5-2.7 2-4.1l-2-1.3zM70 64H58V52h12v12zm0-15H58V37h12v12zm15 15H73V52h12v12zm0-15H73V37h12v12zm15 15H88V52h12v12zm-45 0H43V52h12v12zm0-15H43V37h12v12zM40 64H28V52h12v12z"/></svg>`,
+  githubactions:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle fill="#2088FF" cx="64" cy="64" r="64"/><path fill="#fff" d="M96 56H72V32H56v24H32v16h24v24h16V72h24z"/></svg>`,
+  jira:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#2684FF" d="M104.5 20h-40L93.3 58.8c5 5 5 13.2 0 18.2L64 106l-4.8-4.8 31.3-31.3H18.3V64L64 18.3c5-5 13.1-5 18.2 0L104.5 40.5V20z"/><path fill="#2684FF" d="M23.5 108h40L34.7 69.2c-5-5-5-13.2 0-18.2L64 22l4.8 4.8L37.5 58.1h72.2V64L64 109.7c-5 5-13.1 5-18.2 0L23.5 87.5V108z" opacity=".6"/></svg>`,
+  trello:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect fill="#0079BF" width="128" height="128" rx="14"/><rect fill="#fff" x="14" y="14" width="45" height="72" rx="5"/><rect fill="#fff" x="69" y="14" width="45" height="50" rx="5"/></svg>`,
+  visualstudio:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#6C33AF" d="M92.6 0L51.9 40.7 20.9 18.4 0 28.8v70.4l20.9 10.4 31-22.4 40.7 40.8L128 117.4V10.6zm4.1 99.1l-19.4-9.7V38.6l19.4-9.5z"/><path fill="#9151C5" d="M0 99.2l20.9 10.4V18.4L0 28.8z"/><path fill="#DFBEFF" d="M92.6 64L51.9 40.7l-31 22.4L51.9 87.3z"/></svg>`,
+  nodejs:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#83CD29" d="M114.8 47.2L67.6 20.3c-2.2-1.3-5-1.3-7.2 0L13.2 47.2C11 48.5 9.6 50.9 9.6 53.5v53.9c0 2.6 1.4 5 3.6 6.3l47.2 27.2c2.2 1.3 5 1.3 7.2 0l47.2-27.2c2.2-1.3 3.6-3.7 3.6-6.3V53.5c0-2.6-1.4-5-3.6-6.3z"/><path fill="#fff" d="M60.4 78.9L39.2 91.7V53.5l21.2-12.8z"/><path fill="#404137" d="M88.8 53.5L67.6 40.7 60.4 44.9v47.5l7.2-4.2 21.2-12.8z"/></svg>`,
+};
+
+const SKILL_MAP = {
+  'C#':'csharp','JavaScript':'js','TypeScript':'ts','Python':'python',
+  'HTML5':'html5','CSS3':'css3','SQL':'sql',
+  '.NET Core':'dotnet','Angular':'angular','ASP.NET':'aspnet',
+  'EF Core':'efcore','Bootstrap':'bootstrap',
+  'Azure':'azure','Azure DevOps':'azuredevops','Git':'git','GitHub':'github',
+  'SQL Server':'sqlserver','Postman':'postman','VS Code':'vscode','JIRA':'jira',
+  'REST APIs':'nodejs','Microservices':'docker','Agile/Scrum':'trello',
+  'CI/CD':'githubactions','Visual Studio':'visualstudio',
+};
+
+const SKILLS = [
+  {label:'C#',           cat:0},{label:'JavaScript',  cat:0},{label:'TypeScript',  cat:0},
+  {label:'Python',       cat:0},{label:'HTML5',        cat:0},{label:'CSS3',        cat:0},
+  {label:'SQL',          cat:0},
+  {label:'.NET Core',    cat:1},{label:'Angular',      cat:1},{label:'ASP.NET',     cat:1},
+  {label:'EF Core',      cat:1},{label:'Bootstrap',    cat:1},
+  {label:'Azure',        cat:2},{label:'Azure DevOps', cat:2},{label:'Git',         cat:2},
+  {label:'GitHub',       cat:2},{label:'SQL Server',   cat:2},{label:'Postman',     cat:2},
+  {label:'VS Code',      cat:2},{label:'JIRA',         cat:2},
+  {label:'REST APIs',    cat:3},{label:'Microservices',cat:3},{label:'Agile/Scrum', cat:3},
+  {label:'CI/CD',        cat:3},{label:'Visual Studio',cat:3},
+];
+
+const COLORS = ['#00d4ff','#39ff8f','#ff7043','#c084fc'];
+
+/* ── SVG string → Image via Blob URL ── */
+function svgToImg(svgStr){
+  return new Promise(resolve=>{
+    const blob = new Blob([svgStr],{type:'image/svg+xml'});
+    const url  = URL.createObjectURL(blob);
+    const img  = new Image();
+    img.onload  = ()=>{ resolve(img); URL.revokeObjectURL(url); };
+    img.onerror = ()=>{ resolve(null); URL.revokeObjectURL(url); };
+    img.src = url;
+  });
+}
+
+/* ── Draw circular icon sprite on canvas ── */
+function buildSprite(img, color, label){
+  const S=128;
+  const oc=document.createElement('canvas');
+  oc.width=oc.height=S;
+  const ctx=oc.getContext('2d');
+
+  // outer glow halo
+  const grd=ctx.createRadialGradient(S/2,S/2,S*.3,S/2,S/2,S*.52);
+  grd.addColorStop(0,color+'66'); grd.addColorStop(1,color+'00');
+  ctx.fillStyle=grd;
+  ctx.beginPath(); ctx.arc(S/2,S/2,S/2,0,Math.PI*2); ctx.fill();
+
+  // dark disc
+  ctx.fillStyle='rgba(8,11,20,0.93)';
+  ctx.beginPath(); ctx.arc(S/2,S/2,S*.38,0,Math.PI*2); ctx.fill();
+
+  // coloured border
+  ctx.strokeStyle=color; ctx.lineWidth=4;
+  ctx.beginPath(); ctx.arc(S/2,S/2,S*.38,0,Math.PI*2); ctx.stroke();
+
+  // icon centred & clipped
+  const pad=S*.26;
+  ctx.save();
+  ctx.beginPath(); ctx.arc(S/2,S/2,S*.34,0,Math.PI*2); ctx.clip();
+  if(img){ try{ ctx.drawImage(img,pad,pad,S-pad*2,S-pad*2); }catch(e){} }
+  else{
+    // fallback initials
+    const init=label.split(/[\s\/\.]/g).map(w=>w[0]||'').join('').slice(0,2).toUpperCase();
+    ctx.fillStyle='#e8edf5';
+    ctx.font=`bold ${S*.3}px sans-serif`;
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(init,S/2,S/2);
+  }
+  ctx.restore();
+  return oc;
+}
+
+/* ── Three.js setup ── */
+const wrap  =document.getElementById('globeWrap');
+const canvas=document.getElementById('skillGlobe');
+
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setClearColor(0,0);
+
+const scene =new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(50,1,.1,1000);
+camera.position.z=2.8;
+
+function resize(){
+  const W=wrap.clientWidth,H=Math.max(wrap.clientHeight||0,wrap.offsetHeight||0,380);
+  renderer.setSize(W,H,false);
+  camera.aspect=W/H; camera.updateProjectionMatrix();
+}
+resize();
+new ResizeObserver(resize).observe(wrap);
+
+const grp=new THREE.Group(); scene.add(grp);
+
+// wireframe sphere
+const geoS=new THREE.SphereGeometry(1,36,36);
+const matS=new THREE.MeshBasicMaterial({color:0x00d4ff,wireframe:true,transparent:true,opacity:.055});
+grp.add(new THREE.Mesh(geoS,matS));
+
+// equator ring
+const geoR=new THREE.TorusGeometry(1.005,.003,8,140);
+const matR=new THREE.MeshBasicMaterial({color:0x00d4ff,transparent:true,opacity:.22});
+grp.add(new THREE.Mesh(geoR,matR));
+
+// surface dots
+const dArr=[];
+for(let i=0;i<200;i++){const p=Math.acos(-1+(2*i)/200),t=Math.sqrt(200*Math.PI)*p;dArr.push(Math.sin(p)*Math.cos(t),Math.cos(p),Math.sin(p)*Math.sin(t));}
+const dGeo=new THREE.BufferGeometry();
+dGeo.setAttribute('position',new THREE.Float32BufferAttribute(dArr,3));
+const dMat=new THREE.PointsMaterial({color:0x00d4ff,size:.011,transparent:true,opacity:.32});
+grp.add(new THREE.Points(dGeo,dMat));
+
+/* ── Place sprite on Fibonacci sphere ── */
+const nodes=[];
+const N=SKILLS.length, golden=Math.PI*(3-Math.sqrt(5)), R=1.2;
+
+function addNode(i,tex){
+  const y=1-(i/(N-1))*2, r=Math.sqrt(Math.max(0,1-y*y)), th=golden*i;
+  const x=r*Math.cos(th), z=r*Math.sin(th);
+  const mat=new THREE.SpriteMaterial({map:tex,transparent:true,depthWrite:false});
+  const sp=new THREE.Sprite(mat);
+  sp.scale.set(.26,.26,1);
+  sp.position.set(x*R,y*R,z*R);
+  grp.add(sp);
+  const dg=new THREE.SphereGeometry(.015,8,8);
+  const dm=new THREE.MeshBasicMaterial({color:new THREE.Color(COLORS[SKILLS[i].cat]),transparent:true,opacity:.9});
+  const dot=new THREE.Mesh(dg,dm);
+  dot.position.set(x*1.005,y*1.005,z*1.005);
+  grp.add(dot);
+  nodes.push({sp,dot,idx:i});
+}
+
+/* ── Load all SVG icons via Blob URLs, then build sprites ── */
+let loaded=0;
+function tryStart(){ if(++loaded>=N) startAnim(); }
+
+Promise.all(SKILLS.map(async(skill,i)=>{
+  const key=SKILL_MAP[skill.label];
+  const svgStr=SVG[key]||null;
+  const img=svgStr ? await svgToImg(svgStr) : null;
+  const oc=buildSprite(img,COLORS[skill.cat],skill.label);
+  const tex=new THREE.CanvasTexture(oc);
+  addNode(i,tex);
+  tryStart();
+}));
+
+/* ── Drag ── */
+let drag=false,prev={x:0,y:0},vx=0,vy=0,auto=true;
+const xy=e=>e.touches?{x:e.touches[0].clientX,y:e.touches[0].clientY}:{x:e.clientX,y:e.clientY};
+canvas.addEventListener('mousedown', e=>{drag=true;auto=false;prev=xy(e);vx=vy=0;wrap.classList.add('dragged');});
+canvas.addEventListener('touchstart',e=>{drag=true;auto=false;prev=xy(e);vx=vy=0;wrap.classList.add('dragged');e.preventDefault();},{passive:false});
+window.addEventListener('mousemove', e=>{if(!drag)return;const c=xy(e),dx=c.x-prev.x,dy=c.y-prev.y;grp.rotation.y+=dx*.007;grp.rotation.x+=dy*.007;vx=dx;vy=dy;prev=c;});
+window.addEventListener('touchmove', e=>{if(!drag)return;const c=xy(e),dx=c.x-prev.x,dy=c.y-prev.y;grp.rotation.y+=dx*.007;grp.rotation.x+=dy*.007;vx=dx;vy=dy;prev=c;e.preventDefault();},{passive:false});
+window.addEventListener('mouseup',  ()=>{drag=false;});
+window.addEventListener('touchend', ()=>{drag=false;});
+
+/* ── Tooltip ── */
+const tip=document.createElement('div');
+Object.assign(tip.style,{position:'absolute',background:'rgba(7,9,15,.92)',border:'1px solid rgba(0,212,255,.35)',
+  color:'#e8edf5',fontFamily:'Fira Code,monospace',fontSize:'11px',padding:'4px 11px',borderRadius:'7px',
+  pointerEvents:'none',opacity:'0',transition:'opacity .18s',transform:'translate(-50%,-130%)',
+  whiteSpace:'nowrap',zIndex:'10',letterSpacing:'.04em'});
+wrap.appendChild(tip);
+const ray=new THREE.Raycaster(),mp=new THREE.Vector2();
+canvas.addEventListener('mousemove',e=>{
+  const rc=canvas.getBoundingClientRect();
+  mp.x=((e.clientX-rc.left)/rc.width)*2-1;
+  mp.y=-((e.clientY-rc.top)/rc.height)*2+1;
+  ray.setFromCamera(mp,camera);
+  const hits=ray.intersectObjects(nodes.map(n=>n.sp));
+  if(hits.length){
+    const n=nodes.find(n=>n.sp===hits[0].object);
+    if(n){tip.textContent=SKILLS[n.idx].label;tip.style.opacity='1';tip.style.left=(e.clientX-rc.left)+'px';tip.style.top=(e.clientY-rc.top)+'px';canvas.style.cursor='pointer';return;}
+  }
+  tip.style.opacity='0'; canvas.style.cursor=drag?'grabbing':'grab';
+});
+canvas.addEventListener('mouseleave',()=>{tip.style.opacity='0';});
+
+/* ── Animation loop ── */
+let t=0,running=false;
+function startAnim(){ if(running)return; running=true; loop(); }
+function loop(){
+  requestAnimationFrame(loop); t+=.005;
+  if(!drag){
+    if(auto){grp.rotation.y+=.003;grp.rotation.x+=.0007;}
+    else{vx*=.93;vy*=.93;grp.rotation.y+=vx*.004;grp.rotation.x+=vy*.004;if(Math.abs(vx)<.01&&Math.abs(vy)<.01)auto=true;}
+  }
+  nodes.forEach(({sp})=>sp.quaternion.copy(camera.quaternion));
+  dMat.opacity=.22+.12*Math.sin(t);
+  renderer.render(scene,camera);
+}
+
+// Pause off-screen
+new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!running)startAnim();}),{threshold:.05}).observe(wrap);
+
+// Theme
+window.addEventListener('themechange',()=>{
+  const l=document.documentElement.dataset.theme==='light';
+  matS.opacity=l?.1:.055; dMat.color.set(l?0x0078a8:0x00d4ff);
+});
+
+})();
 </script>
 </body>
 </html>
