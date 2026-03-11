@@ -133,6 +133,8 @@ a{color:inherit;text-decoration:none;}ul{list-style:none;}
 /* ═══════════════ SECTIONS ═══════════════ */
 section{min-height:100vh;padding:80px 56px;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--border);}
 section:last-child{border-bottom:none;}
+/* Skills section must grow with globe content — no forced 100vh */
+#tech{min-height:unset;height:auto;padding-bottom:80px;}
 .sec-tag{font-family:var(--mono);font-size:11px;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px;opacity:0;transform:translateX(-20px);transition:all .5s var(--ease);}
 .sec-tag.vis{opacity:1;transform:none;}
 .sec-title{font-size:clamp(28px,4vw,50px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:40px;opacity:0;transform:translateY(24px);transition:all .6s var(--ease) .1s;}
@@ -279,6 +281,7 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
 @media(max-width:1100px){
   :root{--sidebar-w:240px;}
   section{padding:72px 44px;}
+  #tech{padding-bottom:72px;}
   footer{padding:18px 44px;}
 }
 
@@ -290,6 +293,7 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
   .main{margin-left:0;padding-top:var(--nav-h);}
   footer{margin-left:0;padding:18px 28px;flex-direction:column;gap:6px;text-align:center;}
   section{padding:64px 36px;min-height:auto;}
+  #tech{padding-bottom:64px;}
   #home{min-height:calc(100vh - var(--nav-h));}
   .scroll-widget{bottom:20px;right:16px;}
 }
@@ -297,6 +301,7 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
 /* ── Tablet portrait: ≤720px ── */
 @media(max-width:720px){
   section{padding:56px 24px;}
+  #tech{padding-bottom:56px;}
   .about-grid{grid-template-columns:1fr;gap:32px;}
   .edu-cert-grid{grid-template-columns:1fr 1fr;gap:14px;}
   .projects-grid{grid-template-columns:1fr 1fr;}
@@ -311,6 +316,7 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
 /* ── Mobile: ≤520px ── */
 @media(max-width:520px){
   section{padding:48px 18px;}
+  #tech{padding-bottom:48px;}
   .hero-name{letter-spacing:-1.5px;line-height:1;}
   .hero-btns{flex-direction:column;width:fit-content;}
   .hero-btns .btn{justify-content:center;}
@@ -339,6 +345,7 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
 /* ── Small mobile: ≤380px ── */
 @media(max-width:380px){
   section{padding:40px 16px;}
+  #tech{padding-bottom:40px;}
   .tech-grid{grid-template-columns:repeat(2,1fr);}
   .hero-btns .btn{padding:11px 20px;font-size:12px;}
   .info-grid{grid-template-columns:1fr;}
@@ -355,23 +362,32 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
   .social-btn:hover{transform:none;}
 }
 /* ═══════════════ GLOBE SECTION ═══════════════ */
-.globe-hint{font-family:var(--mono);font-size:12px;color:var(--sub);margin-bottom:28px;letter-spacing:.05em;}
-.globe-layout{display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:center;}
+.globe-hint{font-family:var(--mono);font-size:12px;color:var(--sub);margin-bottom:24px;letter-spacing:.05em;}
+
+.globe-layout{
+  display:grid;
+  grid-template-columns:1fr 320px;
+  gap:40px;
+  align-items:start;
+  width:100%;
+}
+
 .globe-wrap{
   position:relative;
-  width:100%;aspect-ratio:1;
-  min-height:280px;
-  max-height:500px;
+  width:100%;
+  height:480px;          /* fixed height — no aspect-ratio fights */
   border-radius:20px;
-  background:radial-gradient(ellipse at 40% 40%, rgba(0,212,255,.07) 0%, rgba(0,0,0,0) 70%);
+  background:radial-gradient(ellipse at 40% 40%, rgba(0,212,255,.07) 0%, transparent 70%);
   border:1px solid var(--border);
   overflow:hidden;
   cursor:grab;
+  flex-shrink:0;
 }
 .globe-wrap:active{cursor:grabbing;}
 #skillGlobe{display:block;width:100%!important;height:100%!important;}
+
 .globe-overlay-text{
-  position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
+  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
   font-family:var(--mono);font-size:10px;color:var(--sub);
   background:var(--glass);border:1px solid var(--border);
   padding:4px 14px;border-radius:20px;
@@ -381,13 +397,16 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
 }
 .globe-wrap.dragged .globe-overlay-text{opacity:0;}
 
-.globe-legend{display:flex;flex-direction:column;gap:20px;}
-.legend-group{}
+.globe-legend{
+  display:flex;flex-direction:column;gap:18px;
+  /* stick to top of grid cell, don't stretch */
+  align-self:start;
+}
 .legend-title{
   display:flex;align-items:center;gap:8px;
-  font-weight:600;font-size:13px;margin-bottom:10px;
+  font-weight:600;font-size:13px;margin-bottom:9px;
 }
-.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;box-shadow:0 0 6px currentColor;}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .legend-tags{display:flex;flex-wrap:wrap;gap:7px;}
 .l-tag{
   font-family:var(--mono);font-size:11px;
@@ -398,21 +417,32 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
   transition:all .2s;cursor:default;
 }
 .l-tag:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,212,255,.2);}
+.l-tag.lit{
+  transform:translateY(-2px) scale(1.08);
+  box-shadow:0 0 0 2px currentColor, 0 0 18px currentColor;
+  font-weight:700;
+  z-index:1;
+  position:relative;
+}
+.l-tag.dim{
+  opacity:0.25;
+  filter:grayscale(1);
+}
 
-/* ── Responsive globe ── */
+/* ── Globe responsive ── */
 
-/* Tablet landscape ≤900px: stack globe above legend */
+@media(max-width:1100px){
+  .globe-layout{grid-template-columns:1fr 280px;gap:28px;}
+  .globe-wrap{height:420px;}
+}
+
 @media(max-width:900px){
+  /* Stack: globe on top, legend below */
   .globe-layout{
     grid-template-columns:1fr;
-    gap:24px;
+    gap:28px;
   }
-  .globe-wrap{
-    aspect-ratio:4/3;
-    min-height:240px;
-    max-height:360px;
-    width:100%;
-  }
+  .globe-wrap{height:360px;}
   .globe-legend{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -420,44 +450,33 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
   }
 }
 
-/* Tablet portrait ≤720px */
 @media(max-width:720px){
-  .globe-wrap{
-    aspect-ratio:5/3;
-    min-height:200px;
-    max-height:300px;
-  }
-  .globe-hint{font-size:11px;margin-bottom:18px;}
-  .legend-title{font-size:12px;}
-  .l-tag{font-size:10px;padding:3px 9px;}
+  .globe-wrap{height:300px;}
 }
 
-/* Mobile ≤520px */
 @media(max-width:520px){
   .globe-wrap{
-    aspect-ratio:16/10;
-    min-height:180px;
-    max-height:240px;
+    height:240px;
     border-radius:14px;
   }
-  .globe-overlay-text{font-size:9px;padding:3px 10px;bottom:10px;}
+  .globe-overlay-text{font-size:9px;padding:3px 10px;bottom:8px;}
   .globe-legend{
     grid-template-columns:1fr 1fr;
     gap:10px;
   }
-  .legend-group{background:var(--glass);border:1px solid var(--border);border-radius:10px;padding:12px;}
+  .legend-group{
+    background:var(--glass);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:11px;
+  }
   .legend-title{font-size:11px;margin-bottom:7px;}
   .legend-dot{width:6px;height:6px;}
   .l-tag{font-size:10px;padding:2px 8px;}
 }
 
-/* Small mobile ≤380px */
 @media(max-width:380px){
-  .globe-wrap{
-    aspect-ratio:16/9;
-    min-height:160px;
-    max-height:200px;
-  }
+  .globe-wrap{height:200px;}
   .globe-legend{grid-template-columns:1fr;}
 }
 </style>
@@ -641,7 +660,7 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
     <p class="globe-hint reveal">Drag to explore the skills universe</p>
 
     <!-- GLOBE WRAPPER -->
-    <div class="globe-layout reveal">
+    <div class="globe-layout">
       <div class="globe-wrap" id="globeWrap">
         <canvas id="skillGlobe"></canvas>
         <div class="globe-overlay-text">Drag to rotate</div>
@@ -650,25 +669,46 @@ footer{padding:20px 56px;border-top:1px solid var(--border);display:flex;justify
         <div class="legend-group">
           <div class="legend-title"><span class="legend-dot" style="background:#00d4ff"></span>Languages</div>
           <div class="legend-tags">
-            <span class="l-tag">C#</span><span class="l-tag">JavaScript</span><span class="l-tag">TypeScript</span><span class="l-tag">Python</span><span class="l-tag">SQL</span><span class="l-tag">HTML5/CSS3</span>
+            <span class="l-tag" data-skill="C#">C#</span>
+            <span class="l-tag" data-skill="JavaScript">JavaScript</span>
+            <span class="l-tag" data-skill="TypeScript">TypeScript</span>
+            <span class="l-tag" data-skill="Python">Python</span>
+            <span class="l-tag" data-skill="SQL">SQL</span>
+            <span class="l-tag" data-skill="HTML5">HTML5</span>
+            <span class="l-tag" data-skill="CSS3">CSS3</span>
           </div>
         </div>
         <div class="legend-group">
           <div class="legend-title"><span class="legend-dot" style="background:#39ff8f"></span>Frameworks</div>
           <div class="legend-tags">
-            <span class="l-tag" style="border-color:rgba(57,255,143,.3);color:#39ff8f">.NET Core</span><span class="l-tag" style="border-color:rgba(57,255,143,.3);color:#39ff8f">Angular</span><span class="l-tag" style="border-color:rgba(57,255,143,.3);color:#39ff8f">ASP.NET MVC</span><span class="l-tag" style="border-color:rgba(57,255,143,.3);color:#39ff8f">Entity Framework</span><span class="l-tag" style="border-color:rgba(57,255,143,.3);color:#39ff8f">Bootstrap</span>
+            <span class="l-tag" data-skill=".NET Core" style="border-color:rgba(57,255,143,.3);color:#39ff8f">.NET Core</span>
+            <span class="l-tag" data-skill="Angular" style="border-color:rgba(57,255,143,.3);color:#39ff8f">Angular</span>
+            <span class="l-tag" data-skill="ASP.NET" style="border-color:rgba(57,255,143,.3);color:#39ff8f">ASP.NET MVC</span>
+            <span class="l-tag" data-skill="EF Core" style="border-color:rgba(57,255,143,.3);color:#39ff8f">Entity Framework</span>
+            <span class="l-tag" data-skill="Bootstrap" style="border-color:rgba(57,255,143,.3);color:#39ff8f">Bootstrap</span>
           </div>
         </div>
         <div class="legend-group">
           <div class="legend-title"><span class="legend-dot" style="background:#ff7043"></span>Cloud &amp; Tools</div>
           <div class="legend-tags">
-            <span class="l-tag" style="border-color:rgba(255,112,67,.3);color:#ff7043">Azure</span><span class="l-tag" style="border-color:rgba(255,112,67,.3);color:#ff7043">Azure DevOps</span><span class="l-tag" style="border-color:rgba(255,112,67,.3);color:#ff7043">Git/GitHub</span><span class="l-tag" style="border-color:rgba(255,112,67,.3);color:#ff7043">SQL Server</span><span class="l-tag" style="border-color:rgba(255,112,67,.3);color:#ff7043">UiPath</span><span class="l-tag" style="border-color:rgba(255,112,67,.3);color:#ff7043">Postman</span>
+            <span class="l-tag" data-skill="Azure" style="border-color:rgba(255,112,67,.3);color:#ff7043">Azure</span>
+            <span class="l-tag" data-skill="Azure DevOps" style="border-color:rgba(255,112,67,.3);color:#ff7043">Azure DevOps</span>
+            <span class="l-tag" data-skill="Git" style="border-color:rgba(255,112,67,.3);color:#ff7043">Git</span>
+            <span class="l-tag" data-skill="GitHub" style="border-color:rgba(255,112,67,.3);color:#ff7043">GitHub</span>
+            <span class="l-tag" data-skill="SQL Server" style="border-color:rgba(255,112,67,.3);color:#ff7043">SQL Server</span>
+            <span class="l-tag" data-skill="Postman" style="border-color:rgba(255,112,67,.3);color:#ff7043">Postman</span>
+            <span class="l-tag" data-skill="VS Code" style="border-color:rgba(255,112,67,.3);color:#ff7043">VS Code</span>
+            <span class="l-tag" data-skill="JIRA" style="border-color:rgba(255,112,67,.3);color:#ff7043">JIRA</span>
           </div>
         </div>
         <div class="legend-group">
           <div class="legend-title"><span class="legend-dot" style="background:#c084fc"></span>Architecture</div>
           <div class="legend-tags">
-            <span class="l-tag" style="border-color:rgba(192,132,252,.3);color:#c084fc">REST APIs</span><span class="l-tag" style="border-color:rgba(192,132,252,.3);color:#c084fc">Microservices</span><span class="l-tag" style="border-color:rgba(192,132,252,.3);color:#c084fc">SOLID</span><span class="l-tag" style="border-color:rgba(192,132,252,.3);color:#c084fc">JWT/RBAC</span><span class="l-tag" style="border-color:rgba(192,132,252,.3);color:#c084fc">CI/CD</span>
+            <span class="l-tag" data-skill="REST APIs" style="border-color:rgba(192,132,252,.3);color:#c084fc">REST APIs</span>
+            <span class="l-tag" data-skill="Microservices" style="border-color:rgba(192,132,252,.3);color:#c084fc">Microservices</span>
+            <span class="l-tag" data-skill="Agile/Scrum" style="border-color:rgba(192,132,252,.3);color:#c084fc">Agile/Scrum</span>
+            <span class="l-tag" data-skill="CI/CD" style="border-color:rgba(192,132,252,.3);color:#c084fc">CI/CD</span>
+            <span class="l-tag" data-skill="Visual Studio" style="border-color:rgba(192,132,252,.3);color:#c084fc">Visual Studio</span>
           </div>
         </div>
       </div>
@@ -988,9 +1028,9 @@ function getCamZ(){
 }
 
 function resize(){
-  /* Use offsetWidth/offsetHeight which are always available after DOM paint */
   const W = wrap.offsetWidth  || 300;
-  const H = wrap.offsetHeight || (isMobile() ? 200 : 380);
+  const H = wrap.offsetHeight || 300;
+  if(W === 0 || H === 0) return;   /* guard — skip if not yet painted */
   renderer.setSize(W, H, false);
   camera.aspect = W / H;
   camera.position.z = getCamZ();
@@ -1095,37 +1135,100 @@ canvas.addEventListener('mousemove',e=>{
 });
 canvas.addEventListener('mouseleave',()=>{tip.style.opacity='0';});
 
+/* ── Highlight state ── */
+let hlIdx   = -1;   // index into nodes[] of the highlighted skill (-1 = none)
+const DIM   = 0.15; // opacity for dimmed nodes
+
 /* ── Animation loop ── */
 let t=0, running=false, paused=false;
+
 function startAnim(){
   if(running) return;
-  running=true;
-  loop();
-}
-function loop(){
-  requestAnimationFrame(loop);
-  if(paused) return;
-  t+=.005;
-  if(!drag){
-    const spd=isMobile()?.002:.003;
-    if(auto){grp.rotation.y+=spd;grp.rotation.x+=.0007;}
-    else{vx*=.93;vy*=.93;grp.rotation.y+=vx*.004;grp.rotation.x+=vy*.004;if(Math.abs(vx)<.01&&Math.abs(vy)<.01)auto=true;}
-  }
-  nodes.forEach(({sp})=>sp.quaternion.copy(camera.quaternion));
-  dMat.opacity=.22+.12*Math.sin(t);
-  renderer.render(scene,camera);
+  running = true;
+  (function loop(){
+    requestAnimationFrame(loop);
+    if(paused) return;
+    t += .005;
+
+    /* rotation */
+    if(!drag){
+      const spd = isMobile() ? .002 : .003;
+      if(auto){ grp.rotation.y += spd; grp.rotation.x += .0007; }
+      else{ vx*=.93; vy*=.93; grp.rotation.y+=vx*.004; grp.rotation.x+=vy*.004; if(Math.abs(vx)<.01&&Math.abs(vy)<.01) auto=true; }
+    }
+
+    /* always face camera */
+    nodes.forEach(({sp}) => sp.quaternion.copy(camera.quaternion));
+
+    /* particle pulse */
+    dMat.opacity = .22 + .12*Math.sin(t);
+
+    /* highlight / dim each node */
+    const ss = getSpriteScale();
+    nodes.forEach(({sp}, i) => {
+      if(hlIdx === -1){
+        /* nothing hovered — restore everything */
+        sp.scale.x += (ss - sp.scale.x) * .12;
+        sp.scale.y = sp.scale.x;
+        sp.material.opacity += (1 - sp.material.opacity) * .12;
+      } else if(i === hlIdx){
+        /* hovered node — grow to 2.4× and stay fully opaque */
+        const target = ss * 2.4;
+        sp.scale.x += (target - sp.scale.x) * .14;
+        sp.scale.y = sp.scale.x;
+        sp.material.opacity = 1;
+      } else {
+        /* other nodes — shrink slightly and dim */
+        sp.scale.x += (ss * .75 - sp.scale.x) * .1;
+        sp.scale.y = sp.scale.x;
+        sp.material.opacity += (DIM - sp.material.opacity) * .1;
+      }
+    });
+
+    renderer.render(scene, camera);
+  })();
 }
 
-// Pause rendering when scrolled off-screen to save battery
+/* pause off-screen */
 new IntersectionObserver(es=>es.forEach(e=>{ paused=!e.isIntersecting; }),{threshold:.05}).observe(wrap);
 
-// Theme
+/* theme */
 window.addEventListener('themechange',()=>{
-  const l=document.documentElement.dataset.theme==='light';
-  matS.opacity=l?.1:.055; dMat.color.set(l?0x0078a8:0x00d4ff);
+  const l = document.documentElement.dataset.theme==='light';
+  matS.opacity = l?.1:.055;
+  dMat.color.set(l ? 0x0078a8 : 0x00d4ff);
 });
+
+/* ── Wire legend tags → globe highlight ── */
+const allTags = document.querySelectorAll('.l-tag[data-skill]');
+
+function setHighlight(label){
+  hlIdx = label ? SKILLS.findIndex(s => s.label === label) : -1;
+  allTags.forEach(t => {
+    const match = t.dataset.skill === label;
+    t.classList.toggle('lit', !!label && match);
+    t.classList.toggle('dim', !!label && !match);
+  });
+}
+
+allTags.forEach(tag => {
+  tag.addEventListener('mouseenter', () => setHighlight(tag.dataset.skill));
+  tag.addEventListener('mouseleave', () => setHighlight(null));
+
+  /* mobile tap: tap once to highlight, tap again (or elsewhere) to clear */
+  tag.addEventListener('touchstart', e => {
+    e.preventDefault();
+    const already = tag.classList.contains('lit');
+    setHighlight(already ? null : tag.dataset.skill);
+  }, {passive:false});
+});
+
+/* tapping anywhere outside a tag clears highlight on mobile */
+document.addEventListener('touchstart', e => {
+  if(!e.target.closest('.l-tag[data-skill]')) setHighlight(null);
+}, {passive:true});
 
 })();
 </script>
 </body>
-</html> 
+</html>
